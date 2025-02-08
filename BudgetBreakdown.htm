@@ -1,0 +1,226 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget</title>
+<!-- Load external CSS styles -->
+<!-- <link rel="stylesheet" href="styles.css"> -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+  #shortcut_button {margin-top:0px;}
+  
+  #clear-btn {margin-left:15px;}
+
+  #last {padding-bottom:65px;}
+</style>
+
+</head>
+
+<body>
+<div class="w3-container w3-black"> 
+
+<form class="w3-container w3-card-4 w3-light-grey">
+
+<h1>
+Big Budget Breakdown
+</h1>
+
+<p><label for="amount_enter">Dollar amount (no symbols: $ , .)
+       <input id="amount_enter"  class="w3-input w3-border w3-round" name="amount" 
+       type="text" maxlength="" size="" value="">
+       </label>
+       </p>
+
+<p><label for="timespan_enter">Timespan (years)
+<input id="timespan_enter"
+       class="w3-input w3-border w3-round" 
+       name="timespan"
+       type="text" maxlength="3"
+       size="2" value="">
+       </label>
+       </p>
+
+<p>
+    <label for="enter_button">
+    <input id="enter_button"  type="button" 
+    class="w3-button w3-black w3-round" value="Enter">
+    </label>
+
+    <label for="clear-btn">
+    <input id="clear-btn"  type="button" 
+    class="w3-button w3-black w3-round" value="Clear">
+    </label>
+</p>
+
+<p>
+       <label for="shortcut_button">
+       <input id="shortcut_button" type="button"
+        class="w3-button w3-black w3-round" value="$1.7 Trillion">
+        (shortcut entry)</label>
+</p>
+
+<p>See results below.</p>
+</form>
+
+<div class="w3-container w3-card-4 w3-black">
+<p id="confirmation"></p>
+
+<p>Amount: $<span id='amount_print'>0</span></p>
+
+<p>Timespan: <span id='timespan_print'>0 years</span></p>
+<hr>
+<p>The breakdown is:</p>
+
+<p>Per year: $<span id='per_year'></span></p>
+<p>Per day: $<span id='per_day'></span></p>
+<p>Per hour: $<span id='per_hour'></span></p>
+<p>Per minute: $<span id='per_minute'></span></p>
+<p id="last">Per second: $<span id='per_second'></span></p>
+
+</div>
+</div>
+
+<script>
+
+// Create variables for budget amount and timespan, and for results.
+// Create short names for HTML element calls
+
+let amount = 0;
+let timespan = 0;
+
+let perYear = 0;
+let perDay = 0;
+let perHour = 0;
+let perMinute = 0;
+let perSecond = 0;
+
+
+// Event listeners for 3 buttons:
+
+document.getElementById("enter_button")
+    .addEventListener("click", getInputs);
+
+document.getElementById("shortcut_button")
+    .addEventListener("click", shortcutInput);
+
+document.getElementById("clear-btn")
+    .addEventListener("click", clearForm);
+
+// Functions for buttons:
+
+function shortcutInput() {
+       document.getElementById('amount_enter')
+       .value = 1700000000000;
+
+       document.getElementById('timespan_enter')
+       .value = 30;
+
+       getInputs();
+}
+
+function clearForm() {
+       // Extend function to reset printed results
+       // Clear the form inputs.
+       document.getElementById('amount_enter')
+       .value = null;
+
+       document.getElementById('timespan_enter')
+       .value = null;
+       
+       // Clear the confirmation element, and the amount-print and timespan-print confirmation elements.
+       document.getElementById('confirmation')
+              .innerHTML = null;
+
+       document.getElementById('amount_print')
+              .innerHTML = 0;
+
+       document.getElementById('timespan_print')
+              .innerHTML = '0 years.';
+
+       // Clear the breakdown printouts.
+       document.getElementById('per_year').innerHTML = null;
+       document.getElementById('per_day').innerHTML = null;
+       document.getElementById('per_hour').innerHTML = null;
+       document.getElementById('per_minute').innerHTML = null;
+       document.getElementById('per_second').innerHTML = null;
+
+return;
+}
+
+function getInputs() {
+
+/* GENERAL PROCESS
+       1. Get inputs via:  variable = document.getElementById('id').value;
+              -Value from input is a string.
+       2. Convert string to number via:   variable = Number(variable);
+       3. Convert number to an integer via:    variable = Math.round(variable);
+       4. Add comma-formatting for display via:  variable =  variable.toLocaleString('en');
+              -Steps 3 & 4 can be combined via: Math.round(variable).toLocaleString('en');
+*/
+       // Get inputs from user
+       amount = document.getElementById('amount_enter').value;
+       timespan = document.getElementById('timespan_enter').value;
+       
+       // Convert values to numbers; Round them to integers; Add commas via toLocaleString('en')
+       amount = Number(amount);
+       amount = Math.round(amount);
+
+       timespan = Number(timespan);
+
+       // print the inputs below the Enter button for confirmation
+       document.getElementById('confirmation')
+              .innerHTML = "You entered,";
+
+       document.getElementById('amount_print')
+           .innerHTML = amount.toLocaleString('en') + ".";
+
+       document.getElementById('timespan_print')
+              .innerHTML = `${timespan} years.`;
+
+       // Do the math
+       perYear = amount / timespan;
+       perDay = amount / timespan / 365;
+       perHour = amount / timespan / 365 / 24;
+       perMinute = amount / timespan / 365 / 24 / 60;
+       perSecond = amount / timespan / 365 / 24 / 60 / 60;
+
+       // Round the results, and print them
+       document.getElementById('per_year').innerHTML =
+              Math.round(perYear).toLocaleString('en')
+              + '.';
+
+       document.getElementById('per_day').innerHTML =
+              Math.round(perDay).toLocaleString('en')
+              + '.';
+
+       document.getElementById('per_hour').innerHTML =
+              Math.round(perHour).toLocaleString('en')
+              + '.';
+
+       document.getElementById('per_minute').innerHTML =
+              Math.round(perMinute).toLocaleString('en')
+              + '.';
+
+       document.getElementById('per_second').innerHTML =
+              Math.round(perSecond).toLocaleString('en')
+              + '.';
+
+       return;
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+<!-- Load external JavaScript -->
+<script src="scripts.js"></script>
+</body>
+</html>
