@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget Breakdown</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="w3-container w3-black"> 
+<form class="w3-container w3-card-4 w3-light-grey formWhole">
+
+<h1>
+       Big Budget Breakdown
+</h1>
+
+<p id="amountP">
+       <label for="amount_enter">
+       <input id="amount_enter" class="w3-input w3-border w3-round addCommas" name="amount" type="text" maxlength="" size="" value="">
+       Amount $</label>
+</p>
+
+<p id="timespanP">
+       <label for="timespan_enter">
+       <input id="timespan_enter" class="w3-input w3-border w3-round addCommas" name="timespan" type="text" maxlength="3" size="2" value="">
+       Number of years</label>
+</p>
+
+<p id="buttonsRow">
+    <label for="enter_button">
+    <input id="enter_button"  type="button" class="w3-button w3-black w3-round" value="Enter">
+    </label>
+
+    <label for="clear-btn">
+    <input id="clear-btn"  type="button" class="w3-button w3-black w3-round" value="Clear">
+    </label>
+</p>
+
+<p id="buttonShortcut">
+       <label for="shortcut_button">
+       <input id="shortcut_button" type="button" class="w3-button w3-black w3-round" value="$1.7 Trillion">
+       (shortcut entry)</label>
+</p>
+
+<p id="seeResultsP">See results below.
+</p>
+</form>
+
+<div class="w3-container w3-card-4 w3-black">
+
+<p id="confirmation">
+</p>
+
+<p>Amount: $<span id='amount_print'>
+              0</span>
+</p>
+
+<p>Timespan: <span id='timespan_print'>
+              0 years
+              </span>
+</p>
+
+<hr>
+
+<p>The Breakdown Is:</p>
+<p>Per year: $<span id='per_year'></span></p>
+<p>Per day: $<span id='per_day'></span></p>
+<p>Per hour: $<span id='per_hour'></span></p>
+<p>Per minute: $<span id='per_minute'></span></p>
+<p id="last">Per second: $<span id='per_second'></span></p>
+
+</div>
+</div>
+
+<!-- Load external JavaScript -->
+<script src="script.js"></script>
+<script src="scripts/scripts.js"></script>
+
+</body>
+</html>
