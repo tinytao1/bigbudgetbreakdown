@@ -1,0 +1,21 @@
+#shortcut_button {margin-top:0px;}
+#clear-btn {margin-left:15px;}
+#last {padding-bottom:65px;}
+
+#amount_enter {width: 100%;}
+
+#timespanP {margin-bottom: 30px;}
+
+#timespan_enter {
+    width: 100%;
+}
+
+#seeResultsP {padding-bottom: 15px;}
+
+/*
+ {
+    text-align: center;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: normal;
+}
+*/
